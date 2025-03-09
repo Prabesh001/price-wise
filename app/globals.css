@@ -1,26 +1,138 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .btn {
+    @apply py-4 px-4 bg-[#282828] hover:bg-[#282828b9] rounded-[30px] text-white text-lg font-semibold;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  .head-text {
+    @apply mt-4 text-6xl leading-[72px] font-bold tracking-[-1.2px] text-gray-900;
+  }
+
+  .section-text {
+    @apply text-[#282828] text-[32px] font-semibold;
+  }
+
+  .small-text {
+    @apply flex gap-2 text-sm font-medium text-[#E43030];
+  }
+
+  .paragraph-text {
+    @apply text-xl leading-[30px] text-gray-600;
+  }
+
+  .hero-carousel {
+    @apply relative sm:px-10 py-5 sm:pt-20 pb-5 max-w-[560px] h-[700px] w-full bg-[#F2F4F7] rounded-[30px] sm:mx-auto;
+  }
+
+  .carousel {
+    @apply flex flex-col-reverse h-[700px];
+  }
+
+  .carousel .control-dots {
+    /* @apply static ; */
+  }
+
+  .carousel .control-dots .dot {
+    @apply w-[10px] h-[10px] bg-[#D9D9D9] rounded-full bottom-0;
+  }
+
+  .carousel .control-dots .dot.selected {
+    @apply bg-[#475467] ;
+  }
+
+  .trending-section {
+    @apply flex flex-col gap-10 px-6 md:px-20 py-24;
+  }
+
+  /* PRODUCT DETAILS PAGE STYLES */
+  .product-container {
+    @apply flex flex-col gap-16 flex-wrap px-6 md:px-20 py-24;
+  }
+
+  .product-image {
+    @apply flex-grow xl:max-w-[50%] max-w-full py-16 border border-[#CDDBFF] rounded-[17px];
+  }
+
+  .product-info {
+    @apply flex items-center flex-wrap gap-10 py-6 border-y border-y-[#E4E4E4];
+  }
+
+  .product-hearts {
+    @apply flex items-center gap-2 px-3 py-2 bg-[#FFF0F0] rounded-[10px];
+  }
+
+  .product-stars {
+    @apply flex items-center gap-2 px-3 py-2 bg-[#FBF3EA] rounded-[27px];
+  }
+
+  .product-reviews {
+    @apply flex items-center gap-2 px-3 py-2 bg-[#EDF0F8] rounded-[27px];
+  }
+
+  /* MODAL */
+  .dialog-container {
+    @apply fixed inset-0 z-10 overflow-y-auto bg-gray-900;
+  }
+
+  .dialog-content {
+    @apply p-6  bg-white inline-block w-full max-w-md my-8 overflow-hidden text-left align-middle transition-all transform  shadow-xl rounded-2xl;
+  }
+
+  .dialog-head_text {
+    @apply text-[#282828] text-lg leading-[24px] font-semibold mt-4;
+  }
+
+  .dialog-input_container {
+    @apply px-5 py-3 mt-3 flex items-center gap-2 border border-gray-300 rounded-[27px];
+  }
+
+  .dialog-input {
+    @apply flex-1 pl-1 border-none text-gray-500 text-base focus:outline-none border border-gray-300 rounded-[27px] shadow-xs;
+  }
+
+  .dialog-btn {
+    @apply px-5 py-3 text-white text-base font-semibold border border-[#282828] bg-[#282828] rounded-lg mt-8;
+  }
+
+  /* NAVBAR */
+  .nav {
+    @apply flex justify-between items-center px-6 md:px-20 py-4;
+  }
+
+  .nav-logo {
+    @apply font-serif text-[21px] text-[#282828] font-bold;
+  }
+
+  /* PRICE INFO */
+  .price-info_card {
+    @apply flex-1 min-w-[200px] flex flex-col gap-2 border-l-[3px] rounded-[10px] bg-[#F4F4F4] px-5 py-4;
+  }
+
+  /* PRODUCT CARD */
+  .product-card {
+    @apply sm:w-[292px] sm:max-w-[292px] w-full flex-1 flex flex-col gap-4 rounded-md;
+  }
+
+  .product-card_img-container {
+    @apply flex-1 relative flex flex-col gap-5 p-4 rounded-md;
+  }
+
+  .product-card_img {
+    @apply max-h-[250px] object-contain w-full h-full bg-transparent;
+  }
+
+  .product-title {
+    @apply text-[#282828] text-xl leading-6 font-semibold truncate;
+  }
+
+  /* SEARCHBAR INPUT */
+  .searchbar-input {
+    @apply flex-1 min-w-[200px] w-full p-3 border border-gray-300 rounded-lg shadow-xs text-base text-gray-500 focus:outline-none;
+  }
+
+  .searchbar-btn {
+    @apply bg-gray-900 border border-gray-900 rounded-lg shadow-xs px-5 py-3 text-white text-base font-semibold hover:opacity-90 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40;
+  }
 }
