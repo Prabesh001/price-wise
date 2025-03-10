@@ -1,4 +1,6 @@
 import puppeteer from "puppeteer";
+import { extractCurrency, extractNumber } from "../utils";
+import { ProductData } from "@/type/ProductType";
 
 export async function scrapeDarazProduct(url: string) {
   if (!url) return;
@@ -13,8 +15,10 @@ export async function scrapeDarazProduct(url: string) {
       el.textContent?.trim()
     );
 
+    await page.waitForSelector(".pdp-mod-product-price", { timeout: 15000 });
+
     const currentPrice = await page
-      .$eval(".pdp-price", (el) => el.textContent?.trim())
+      .$eval(".pdp-price_type_normal", (el) => el.textContent?.trim())
       .catch(() => "");
     const originalPrice = await page
       .$eval(".pdp-price_type_deleted", (el) => el.textContent?.trim())
@@ -39,27 +43,45 @@ export async function scrapeDarazProduct(url: string) {
         .filter((src) => src !== null);
     });
 
+    let i = 0;
+
+    if (currentPrice === "" && originalPrice === "") {
+      i++;
+      if (i < 5) {
+        console.log("Retrying price extraction...");
+        return scrapeDarazProduct(url);
+      }
+      return;
+    }
+
     await browser.close();
 
-    const data = {
+    const data: ProductData = {
       url,
       title,
-      currentPrice,
-      originalPrice,
-      image: image || imagesUrl.forEach((img) => img),
+      currentPrice: extractNumber(currentPrice) || extractNumber(originalPrice),
+      originalPrice:
+        extractNumber(originalPrice) || extractNumber(currentPrice),
+      image: image || (imagesUrl.length > 0 ? imagesUrl[0] : ""),
       priceHistory: [],
-      discount,
-      rating,
+      discount: extractNumber(discount),
+      currency: extractCurrency(currentPrice) || extractCurrency(originalPrice),
+      rating: rating ? parseFloat(rating) || null : null,
+      lowestPrice: extractNumber(currentPrice) || extractNumber(originalPrice),
+      highestPrice: extractNumber(originalPrice) || extractNumber(currentPrice),
+      average: extractNumber(currentPrice) || extractNumber(originalPrice),
     };
 
     console.log(data);
-    return { title, currentPrice, originalPrice, discount, image, imagesUrl };
+    return data;
   } catch (error: any) {
     console.error(`Failed to scrape product: ${error.message}`);
     await browser.close();
     throw new Error(`Failed to scrape product: ${error.message}`);
   }
 }
+
+//Cheerio//
 
 // import axios from "axios";
 // import * as cheerio from "cheerio";

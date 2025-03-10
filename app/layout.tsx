@@ -14,7 +14,6 @@ export const metadata: Metadata = {
   title: "Price Wise",
   description:
     "Track product prices effortlessly and save money on your online shopping.",
-  icons:"assets/icons/price-tag.svg"
   };
 
 export default function RootLayout({

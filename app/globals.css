@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
-
+.box-shadow {
+  border: none;
+  box-shadow: 0 3px 3px lightgray, -3px 0 3px lightgray;
+}
 @layer utilities {
   .btn {
     @apply py-4 px-4 bg-[#282828] hover:bg-[#282828b9] rounded-[30px] text-white text-lg font-semibold;
@@ -39,7 +42,7 @@
   }
 
   .carousel .control-dots .dot.selected {
-    @apply bg-[#475467] ;
+    @apply bg-[#475467];
   }
 
   .trending-section {
@@ -73,7 +76,7 @@
 
   /* MODAL */
   .dialog-container {
-    @apply fixed inset-0 z-10 overflow-y-auto bg-gray-900;
+    @apply fixed inset-0 z-10 overflow-y-auto;
   }
 
   .dialog-content {
@@ -107,7 +110,7 @@
 
   /* PRICE INFO */
   .price-info_card {
-    @apply flex-1 min-w-[200px] flex flex-col gap-2 border-l-[3px] rounded-[10px] bg-[#F4F4F4] px-5 py-4;
+    @apply flex-1 min-w-[200px] max-w-[200px] flex flex-col gap-2 border-l-[3px] rounded-[10px] bg-[#F4F4F4] px-5 py-4;
   }
 
   /* PRODUCT CARD */

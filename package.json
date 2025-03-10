@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.0",
     "axios": "^1.8.2",
     "cheerio": "^1.0.0",
     "https-proxy-agent": "^7.0.6",
+    "mongoose": "^8.12.1",
     "next": "15.2.1",
     "puppeteer": "^24.4.0",
     "react": "^19.0.0",
