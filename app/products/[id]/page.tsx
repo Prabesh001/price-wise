@@ -8,9 +8,10 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
-const ProductDetails = async ({ params: { id } }: Props) => {
+const ProductDetails = async ({ params }: Props) => {
+  const { id } = await params;
   const product: ProductData = await getProductById(id);
   if (!product) redirect("/");
 
@@ -143,7 +144,7 @@ const ProductDetails = async ({ params: { id } }: Props) => {
                 </div>
               </div>
             </div>
-            <Modal/>
+            <Modal id={id} />
           </div>
         </div>
       </div>
@@ -151,10 +152,12 @@ const ProductDetails = async ({ params: { id } }: Props) => {
         <div className="flex flex-col gap-16">
           <div className="flex flex-col gap-5">
             <h3 className="text-2xl text-[#282828] font-semibold">
-              Product Descriptiom
+              Product Description
             </h3>
 
-            <div className="flex flex-col gap-4">desc</div>
+            <div className="flex flex-col gap-4">
+              {product?.description ? "Description" : "No description found!"}
+            </div>
           </div>
 
           <button

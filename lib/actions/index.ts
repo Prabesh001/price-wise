@@ -1,7 +1,9 @@
 "use server";
 
+import { User } from "@/type/ProductType";
 import Product from "../models/Product.model";
 import { connectToDB } from "../mongoose";
+import { generateEmailBody, sendEmail } from "../nodemailer";
 import { scrapeDarazProduct } from "../scrapper";
 import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils";
 import { revalidatePath } from "next/cache";
@@ -78,6 +80,29 @@ export async function getSimilarProducts(id: string) {
       _id: { $ne: id },
     }).limit(3);
     return similarProduct;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function addUserEmailToProduct(id: string, userEmail: string) {
+  try {
+    const product = await Product.findById(id);
+    if (!product) return;
+
+    const userExist = product.users.some(
+      (user: User) => user.email === userEmail
+    );
+
+    if (!userExist) {
+      product.users.push({ email: userEmail });
+
+      await product.save();
+
+      const emailContent = await generateEmailBody(product, "WELCOME");
+
+      await sendEmail(emailContent, [userEmail]);
+    }
   } catch (error) {
     console.log(error);
   }

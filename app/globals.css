@@ -96,7 +96,7 @@
   }
 
   .dialog-btn {
-    @apply px-5 py-3 text-white text-base font-semibold border border-[#282828] bg-[#282828] rounded-lg mt-8;
+    @apply px-5 py-3 text-white text-base font-semibold border w-full border-[#282828] bg-[#282828] rounded-lg mt-8;
   }
 
   /* NAVBAR */

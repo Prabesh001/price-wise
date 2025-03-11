@@ -26,6 +26,9 @@ export async function scrapeDarazProduct(url: string) {
     const discount = await page
       .$eval(".pdp-product-price__discount", (el) => el.textContent?.trim())
       .catch(() => "");
+    const description = await page
+      .$eval(".pdp-product-price__discount", (el) => el.textContent?.trim())
+      .catch(() => "");
 
     const rating = await page
       .$eval(".score-average", (el) => el.textContent?.trim())
@@ -59,6 +62,7 @@ export async function scrapeDarazProduct(url: string) {
     const data: ProductData = {
       url,
       title,
+      description,
       currentPrice: extractNumber(currentPrice) || extractNumber(originalPrice),
       originalPrice:
         extractNumber(originalPrice) || extractNumber(currentPrice),

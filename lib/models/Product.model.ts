@@ -15,6 +15,7 @@ const productSchema = new mongoose.Schema(
       },
     ],
     discount: { type: Number },
+    description: { type: Array },
     rating: { type: Number },
     lowestPrice: { type: Number },
     highestPrice: { type: Number },
@@ -32,4 +33,4 @@ const productSchema = new mongoose.Schema(
 const Product =
   mongoose.models.Product || mongoose.model("Product", productSchema);
 
-export default Product
+export default Product;
