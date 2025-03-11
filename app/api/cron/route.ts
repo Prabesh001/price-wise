@@ -38,7 +38,7 @@ export async function GET() {
         };
 
         const updatedProduct = await Product.findOneAndUpdate(
-          { url: scrappedProduct.url },
+          { url: product.url },
           product
         );
 
