@@ -27,8 +27,6 @@ const SearchBar = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // url = https://www.amazon.com/RS-GamingTM-High-Back-Gaming-Compliant/dp/B0C6B3C2YK/ref=sr_1_2?_encoding=UTF8&sr=8-2
-
     const isValidLink = isValidURL(searchPrompt);
 
     if (!isValidLink) {
@@ -52,7 +50,7 @@ const SearchBar = () => {
         type="text"
         value={searchPrompt}
         onChange={(e) => setSearchPrompt(e.target.value)}
-        placeholder="Enter product link"
+        placeholder="Enter your daraz product link"
         className="searchbar-input"
       />
       <button
